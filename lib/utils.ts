@@ -131,3 +131,14 @@ export const AuthformSchema = (type: string) =>
         : z.string().optional(),
     email: z.string().email({ message: "Email is required" }),
   });
+
+  export const getPageName = (pathname: string): string => {
+    if (pathname === '/') return 'Dashboard'
+    const segments = pathname.split('/').filter(Boolean) 
+    const lastSegment = segments[segments.length - 1]
+  
+    return lastSegment
+      .replace(/-/g, ' ')
+      .replace(/^\w/, (c) => c.toUpperCase()) 
+  }
+  

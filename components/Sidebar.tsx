@@ -11,16 +11,15 @@ const Sidebar = () => {
     const pathname = usePathname(); 
   return (
     <aside className='sidebar'>
-    <Link href="/" />
-    <Image src="/assets/icons/newlogo.png" height={50} width={260} alt='logo' className=' ml-3 h-auto hidden lg:block ' />
-    <Image src="/assets/icons/newlogo.png" height={50} width={260} alt='logo' className=' h-auto lg:hidden  ' />
+    <Link href="/" className=' h-[70px] flex items-center justify-center w-full bg-red'>
+    <Image src="/assets/icons/z.png" height={10} width={110} alt='logo' className=' ' />
+    </Link>
     <nav className='sidebar-nav'>
       <ul className='flex flex-1 flex-col gap-6'>
         {navItems.map(({ url, icon, name }) => {
           return <Link key={name} href={url}>
             <li className={cn("sidebar-nav-item", pathname === url && "shad-active")}>
               <Image src={icon} alt={name} width={24} height={24} className={cn("nav-icon", pathname === url && "nav-icon-active")} />
-              <p className='lg:block hidden'>{name}</p>
             </li>
           </Link>
         })}

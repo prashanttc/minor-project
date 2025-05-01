@@ -20,7 +20,8 @@ WORKDIR /app
 # Copy dependencies
 COPY --from=builder /root/.local /root/.local
 COPY --from=model-downloader /models /app/models/tinyllama
-COPY . .
+COPY app ./app
+COPY chatbot /app/chatbot
 
 # Runtime config
 ENV PATH=/root/.local/bin:$PATH \

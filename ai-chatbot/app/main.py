@@ -1,19 +1,17 @@
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI
 from chatbot.core import ChatEngine
-from dotenv import load_dotenv
 
-load_dotenv()
 app = FastAPI()
 chat_engine = ChatEngine()
 
 @app.post("/chat")
-async def chat_endpoint(query: str, background_tasks: BackgroundTasks):
+async def chat(query: str):
     try:
-        response = await chat_engine.generate_response(query)
-        background_tasks.add_task(
-            chat_engine.db.log_interaction,
-            query, response
-        )
+        response = chat_engine.generate_response(query)
         return {"response": response}
     except Exception as e:
         return {"error": str(e)}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}

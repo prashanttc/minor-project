@@ -5,8 +5,8 @@ services:
     plan: free
     envVars:
       - key: SUPABASE_URL
-        value: your-supabase-url
+        value: https://loqtbypjjasdxtpjrhfe.supabase.co
       - key: SUPABASE_KEY
-        value: your-supabase-key
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxvcXRieXBqamFzZHh0cGpyaGZlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NTM5NzgsImV4cCI6MjA1ODIyOTk3OH0.Lqv71utg2DPvepa2_llNxNpF0o9uUvkqGp9hhQsA7D0
     healthCheckPath: /health
     autoDeploy: true

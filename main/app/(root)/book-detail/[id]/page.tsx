@@ -30,8 +30,8 @@ import Loading from "@/components/Loading";
 import { useSavedStatus, useUpdateInteraction } from "@/query/userQuery/query";
 import { toast } from "sonner";
 
-const BookDetailPage = ({params}:{params: {id: string}}) => {
-  const bookId=params.id;
+const BookDetailPage = ({ params }: { params: { id: string } }) => {
+  const bookId = params.id;
   const [showSummary, setShowSummary] = useState(false);
   const [summaryText, setSummaryText] = useState("");
   const [isSharing, setIsSharing] = useState(false);
@@ -169,13 +169,17 @@ const BookDetailPage = ({params}:{params: {id: string}}) => {
                   size="icon"
                   className="rounded-full"
                   onClick={handleBookmark}
+                  disabled={isPending}
                 >
-                  {isBookmarked ? (
+                  {isPending ? (
+                    <span className="animate-spin rounded-full border-2 border-primary border-t-transparent h-4 w-4" />
+                  ) : isBookmarked ? (
                     <BookmarkIcon className="h-4 w-4 fill-primary text-primary" />
                   ) : (
                     <Bookmark className="h-4 w-4" />
                   )}
                 </Button>
+
                 <Button
                   variant="outline"
                   size="icon"
@@ -345,7 +349,7 @@ const BookDetailPage = ({params}:{params: {id: string}}) => {
             <p className="text-sm font-medium mb-2">Or copy link</p>
             <div className="flex gap-2">
               <Input
-                value={`https://bookverse.com/books/${bookId}`}
+                value={`https://bookhubbs.vercel.app/book-detail/${bookId}`}
                 readOnly
                 className="flex-1"
                 onClick={(e) => e.currentTarget.select()}
@@ -355,7 +359,7 @@ const BookDetailPage = ({params}:{params: {id: string}}) => {
                 className="shrink-0"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `https://bookverse.com/books/${bookId}`
+                    `https://bookhubbs.vercel.app/book-detail/${bookId}`
                   );
                 }}
               >
@@ -370,6 +374,6 @@ const BookDetailPage = ({params}:{params: {id: string}}) => {
       </Dialog>
     </>
   );
-}
+};
 
-export default BookDetailPage
+export default BookDetailPage;

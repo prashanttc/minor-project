@@ -42,9 +42,9 @@
                 <div className="px-6 md:px-10 max-w-xl text-white">
                   <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">{slide.title}</h1>
                   <p className="mb-6 text-white/80">{slide.description}</p>
-                  <Button className="gap-2 rounded-full px-6">
+                  {/* <Button className="gap-2 rounded-full px-6">
                     {slide.cta} <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </div>

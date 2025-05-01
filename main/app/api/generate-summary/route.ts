@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -11,6 +12,10 @@ const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   try {
+     const session = await auth();
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: "Unauthorized" },{status:404})
+      }
     const { title, description, author, bookId } = await request.json();
 
     // Validate input

@@ -7,6 +7,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/app-sidebar";
 import AppHeader from "@/components/app-header";
 import { ScrollAndCursorHandler } from "@/components/ScrollAndCursor";
+import Chatbot from "./chatbot";
 
 export default function ClientRoot({ children }: { children: React.ReactNode }) {
   return (
@@ -22,6 +23,7 @@ export default function ClientRoot({ children }: { children: React.ReactNode }) 
                 {children}
               </main>
             </div>
+            <Chatbot/>
           </div>
         </SidebarProvider>
       </ReactQueryProvider>

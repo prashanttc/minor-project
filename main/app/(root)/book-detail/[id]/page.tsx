@@ -9,6 +9,8 @@ import {
   Bookmark,
   BookmarkIcon,
   Check,
+  Heart,
+  ThumbsUp,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -27,7 +29,7 @@ import {
 } from "@/components/ui/dialog";
 import { useGenerateSummary, useGetBookById } from "@/query/booksQuery/query";
 import Loading from "@/components/Loading";
-import { useSavedStatus, useUpdateInteraction } from "@/query/userQuery/query";
+import { useSavedStatus, useUpdateInteraction, useUpvoteStatus } from "@/query/userQuery/query";
 import { toast } from "sonner";
 
 const BookDetailPage = ({ params }: { params: { id: string } }) => {
@@ -36,12 +38,12 @@ const BookDetailPage = ({ params }: { params: { id: string } }) => {
   const [summaryText, setSummaryText] = useState("");
   const [isSharing, setIsSharing] = useState(false);
   const [showShareDialog, setShowShareDialog] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
   const [readingStarted, setReadingStarted] = useState(false);
 
   const { data: bookData, isLoading } = useGetBookById(bookId);
   const { mutate: userinteraction, isPending } = useUpdateInteraction();
   const { data: isBookmarked } = useSavedStatus(bookId);
+  const { data: isUpvoted } = useUpvoteStatus(bookId);
   const { mutate: generateSummary, isPending: ailoading } =
     useGenerateSummary();
 
@@ -85,6 +87,12 @@ const BookDetailPage = ({ params }: { params: { id: string } }) => {
       action: "saved",
     });
   };
+  const handleUpvote =()=>{
+    userinteraction({
+      bookId: bookId,
+      action: "upvoted",
+    });
+  }
   const handleShare = () => {
     setIsSharing(true);
     setShowShareDialog(true);
@@ -93,15 +101,6 @@ const BookDetailPage = ({ params }: { params: { id: string } }) => {
     setTimeout(() => {
       setIsSharing(false);
     }, 500);
-  };
-
-  const handleDownload = () => {
-    setIsDownloading(true);
-
-    // Simulate download
-    setTimeout(() => {
-      setIsDownloading(false);
-    }, 1500);
   };
 
   const handleStartReading = () => {
@@ -179,6 +178,21 @@ const BookDetailPage = ({ params }: { params: { id: string } }) => {
                     <Bookmark className="h-4 w-4" />
                   )}
                 </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full"
+                  onClick={handleUpvote}
+                  disabled={isPending}
+                >
+                  {isPending ? (
+                    <span className="animate-spin rounded-full border-2 border-primary border-t-transparent h-4 w-4" />
+                  ) : isUpvoted ? (
+                    <ThumbsUp className="h-4 w-4 fill-blue-500 text-blue-500" />
+                  ) : (
+                    <ThumbsUp className="h-4 w-4 text-blue-500" />
+                  )}
+                </Button>
 
                 <Button
                   variant="outline"
@@ -189,19 +203,7 @@ const BookDetailPage = ({ params }: { params: { id: string } }) => {
                 >
                   <Share2 className="h-4 w-4" />
                 </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="rounded-full"
-                  onClick={handleDownload}
-                  disabled={isDownloading}
-                >
-                  {isDownloading ? (
-                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                  ) : (
-                    <Download className="h-4 w-4" />
-                  )}
-                </Button>
+                
               </div>
 
               {showSummary && (

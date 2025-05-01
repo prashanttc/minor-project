@@ -6,3 +6,4 @@ llama-cpp-python==0.2.63
 torch==2.2.2
 cachetools==5.3.3
 python-dotenv==1.0.1
+huggingface_hub

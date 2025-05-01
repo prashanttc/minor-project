@@ -1,21 +1,13 @@
 from sentence_transformers import SentenceTransformer
 from .supabase import SupabaseManager
-from llama_cpp import Llama
+from .model_utils import load_model
 
 class ChatEngine:
     def __init__(self):
         self.embedder = SentenceTransformer('all-MiniLM-L6-v2')
         self.db = SupabaseManager()
+        self.llm = load_model()
 
-        # Load GGUF LLM model using llama-cpp-python
-        self.llm = Llama(
-            model_path="/app/models/tinyllama/TinyLlama-1.1B-Chat-v1.0.Q4_K_M.gguf",
-            n_ctx=2048,
-            n_threads=4,        # Tune based on your Render CPU limits
-            temperature=0.8,
-            repeat_penalty=1.1,
-            verbose=False
-        )
 
     def generate_response(self, query: str) -> str:
         # Embed user query

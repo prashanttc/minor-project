@@ -1,20 +1,18 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from pathlib import Path
+from huggingface_hub import hf_hub_download
+from llama_cpp import Llama
+import os
 
 def load_model():
-    """Load the standard TinyLlama model without quantization"""
-    model_path = Path("models/tinyllama")
-    
-    # No quantization config, just load the regular model
-    model = AutoModelForCausalLM.from_pretrained(
-        model_path,
-        device_map="auto",  # Automatically assigns model layers to devices (use CPU or GPU as available)
-        local_files_only=True
+    model_path = hf_hub_download(
+        repo_id="TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF",
+        filename="TinyLlama-1.1B-Chat-v1.0.Q4_K_M.gguf",
+        cache_dir="./models"
     )
-    
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_path,
-        use_fast=False
+
+    llm = Llama(
+        model_path=model_path,
+        n_ctx=2048,
+        n_threads=4,
+        chat_format="chatml"  # or "llama-2" if needed
     )
-    
-    return model, tokenizer
+    return llm

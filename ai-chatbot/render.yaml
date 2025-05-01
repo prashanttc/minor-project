@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: bookstore-chatbot
+    runtime: docker
+    plan: free
+    envVars:
+      - key: SUPABASE_URL
+        value: your-supabase-url
+      - key: SUPABASE_KEY
+        value: your-supabase-key
+    healthCheckPath: /health
+    autoDeploy: true

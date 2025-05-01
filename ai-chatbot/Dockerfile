@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Download the model during build
 RUN python -c "from huggingface_hub import hf_hub_download; \
     hf_hub_download(repo_id='TheBloke/TinyLlama-1.1B-Chat-v1.0-GGUF', \
-    filename='TinyLlama-1.1B-Chat-v1.0.Q4_K_M.gguf', cache_dir='./models')"
+    filename='tinyllama-1.1b-chat-v1.0.Q2_K.gguf', cache_dir='./models')"
 
 # Set the path for the application (where your app's code will go)
 COPY . /app

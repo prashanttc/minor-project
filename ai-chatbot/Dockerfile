@@ -29,4 +29,4 @@ ENV PATH=/root/.local/bin:$PATH \
     TRANSFORMERS_CACHE=/app/models \
     HF_HOME=/app/models
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

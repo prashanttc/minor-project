@@ -6,9 +6,13 @@ WORKDIR /app
 
 # Install system dependencies (for any necessary tools like wget, etc.)
 RUN apt-get update && apt-get install -y \
-    curl \
+    build-essential \
+    cmake \
     git \
+    wget \
+    curl \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Install Python dependencies (huggingface_hub for model downloading)
 COPY requirements.txt .

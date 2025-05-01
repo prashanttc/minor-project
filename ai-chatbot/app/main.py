@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from chatbot.core import ChatEngine
+from .core import ChatEngine
 
 app = FastAPI()
 chat_engine = ChatEngine()

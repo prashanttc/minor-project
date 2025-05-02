@@ -16,7 +16,7 @@ export function TrendingSection({ books }: TrendingSectionProps) {
   const [showAll, setShowAll] = useState(false)
   const displayBooks = showAll ? books : books.slice(0, 3)
   return (
-    <section className="mb-12">
+    <section className="mb-12 ">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <TrendingUp className="h-5 w-5 text-primary" />
@@ -31,7 +31,7 @@ export function TrendingSection({ books }: TrendingSectionProps) {
         {displayBooks.map((book) => (
           <Link href={`/book-detail/${book.id}`} 
             key={book.id}
-            className="flex cursor-pointer relative gap-4 p-4 rounded-xl border bg-card/50 backdrop-blur transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
+            className="flex cursor-pointer relative gap-4 p-4 rounded-xl border bg-green-100/30 drop-shadow-lg backdrop-blur transition-all duration-200 hover:shadow-xl hover:-translate-y-1"
           >
             <div className="relative w-16 h-24 shrink-0">
               <Image

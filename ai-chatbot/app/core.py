@@ -6,7 +6,7 @@ class ChatEngine:
     def __init__(self):
         self.embedder = SentenceTransformer('all-MiniLM-L6-v2')
         self.db = SupabaseManager()
-        self.llm = load_model()
+        self.llm = load_model() 
 
 
     def generate_response(self, query: str) -> str:

@@ -13,7 +13,7 @@ export async function getRecommendedBooks(limit = 10) {
   let userEmbedding: number[] | null = null;
 
   // 1. Try to get user embedding from Redis
-  const cached = (await redis.get(redisKey)) ;
+  const cached = await redis.get(redisKey) ;
 
   if (cached) {
     userEmbedding = cached as number[];

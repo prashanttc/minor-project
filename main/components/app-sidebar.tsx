@@ -43,14 +43,6 @@ export default function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="My Books">
-              <Link className="cursor-pointer" href={'/my-books'}>
-                <BookOpen className="h-10 w-10" />
-                <span>My Books</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Bookmarks">

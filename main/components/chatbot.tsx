@@ -15,8 +15,6 @@ const Chatbot = () => {
     const [isOpen, setIsOpen] = React.useState(false)
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChatBot()
     const messagesEndRef = React.useRef<HTMLDivElement>(null)
-     console.log("input",input)
-     console.log("mees",messages)
     const toggleChat = () => setIsOpen(!isOpen)
   
     // Scroll to bottom of messages when new message is added

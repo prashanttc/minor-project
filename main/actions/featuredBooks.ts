@@ -19,11 +19,10 @@ export async function getDailyFeaturedBooks() {
 
   try {
     // 1. Try Redis Cache First
-    const cached = (await redis.get(todayKey)) ;
+    const cached = await redis.get(todayKey);
     if (cached) {
       return cached as Book[];
     }
-    
     // 2. Fetch all book IDs
     const allBooks = await prisma.book.findMany({
       select: { id: true },

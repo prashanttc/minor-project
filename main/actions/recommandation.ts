@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { redis } from "@/lib/redis";
 import { auth } from "../auth";
 
 export async function getRecommendedBooks(limit = 10) {
@@ -9,16 +8,7 @@ export async function getRecommendedBooks(limit = 10) {
   const userId = session?.user?.id;
   if (!userId) throw new Error("Unauthorized");
 
-  const redisKey = `user:embedding:${userId}`;
   let userEmbedding: number[] | null = null;
-
-  // 1. Try to get user embedding from Redis
-  const cached = await redis.get(redisKey) ;
-
-  if (cached) {
-    userEmbedding = cached as number[];
-  }
-  
   // 2. Fallback: Fetch from DB if not in Redis
   if (!userEmbedding) {
     const dbResult = await prisma.$queryRawUnsafe<Array<{ embedding: string }>>(

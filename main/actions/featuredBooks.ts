@@ -18,12 +18,6 @@ export async function getDailyFeaturedBooks() {
   const todayKey = `featured_books:${new Date().toISOString().slice(0, 10)}`;
 
   try {
-    // 1. Try Redis Cache First
-    const cached = await redis.get(todayKey);
-    if (cached) {
-      return cached as Book[];
-    }
-    // 2. Fetch all book IDs
     const allBooks = await prisma.book.findMany({
       select: { id: true },
     });
@@ -49,10 +43,6 @@ export async function getDailyFeaturedBooks() {
     const uniqueBooks = Array.from(
       new Map(featuredBooks.map(book => [book.id, book])).values()
     );
-    // 5. Cache in Redis for 24 hours
-    await redis.set(todayKey,JSON.stringify(uniqueBooks), {
-      ex: 60 * 60 * 24,
-    });
 
     return uniqueBooks;
   } catch (error: any) {

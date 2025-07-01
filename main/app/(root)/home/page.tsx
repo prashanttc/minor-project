@@ -31,7 +31,6 @@ export default function HomePage() {
   const [previewBook, setPreviewBook] = useState<Book | null>(null);
   
   const [savedBooks, setSavedBooks] = useState<string[]>([]);
-
   const toggleSave = (bookId: string) => {
     const isSaved = savedBooks.includes(bookId);
     // Optimistic UI update
